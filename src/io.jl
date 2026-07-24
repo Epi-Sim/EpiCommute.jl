@@ -43,9 +43,9 @@ function save_simulation_netCDF(epi_params::Epidemic_Params, population::Populat
 
         isfile(output_fname) && rm(output_fname)
 
-        NetCDF.create(filename, varlist, mode=NC_NETCDF4)
+        NetCDF.create(output_fname, varlist, mode=NC_NETCDF4)
         for (var_label, data) in data_dict
-            ncwrite(data, filename, var_label)
+            ncwrite(data, output_fname, var_label)
         end
     catch e
         @error "Error saving simulation output" exception=(e, catch_backtrace())
